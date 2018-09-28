@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <detailsave_adminhtml_detailsave_index>
+        <reference name="content">
+            <block type="detailsave/adminhtml_detailsave" name="detailsave" />
+        </reference>
+    </detailsave_adminhtml_detailsave_index>
+</layout>

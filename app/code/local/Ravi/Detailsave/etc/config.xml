@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Ravi
+ * @package    Ravi_Detailsave
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Ravi_Detailsave>
+            <version>0.1.0</version>
+        </Ravi_Detailsave>
+    </modules>
+    <frontend>
+        <routers>
+            <detailsave>
+                <use>standard</use>
+                <args>
+                    <module>Ravi_Detailsave</module>
+                    <frontName>detailsave</frontName>
+                </args>
+            </detailsave>
+        </routers>
+        <layout>
+            <updates>
+                <detailsave>
+                    <file>detailsave.xml</file>
+                </detailsave>
+            </updates>
+        </layout>
+		<events>
+			<controller_action_predispatch_checkout_onepage_savebilling>
+			  <observers>
+				  <detailsave>
+					  <type>singleton</type>
+					  <class>Ravi_Detailsave_Model_Observer</class>
+					  <method>afterBillingMethod</method>
+				  </detailsave>
+			  </observers>
+      		</controller_action_predispatch_checkout_onepage_savebilling>
+	    </events>
+    </frontend>
+    <admin>
+        <routers>
+			<detailsave>
+				<use>admin</use>
+				<args>
+					<module>Ravi_Detailsave</module>
+					<frontName>detailsave</frontName>
+				</args>
+			</detailsave>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<detailsave module="detailsave">
+				<title>Customer Save Details</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="detailsave">
+						<title>Customer Details list</title>
+						<sort_order>0</sort_order>
+						<action>detailsave/adminhtml_detailsave</action>
+					</items>
+				</children>
+			</detailsave>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Ravi_Detailsave>
+							<title>Detailsave Module</title>
+							<sort_order>10</sort_order>
+						</Ravi_Detailsave>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<detailsave>
+					<file>detailsave.xml</file>
+				</detailsave>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <detailsave>
+                <class>Ravi_Detailsave_Model</class>
+                <resourceModel>detailsave_mysql4</resourceModel>
+            </detailsave>
+            <detailsave_mysql4>
+                <class>Ravi_Detailsave_Model_Mysql4</class>
+                <entities>
+                    <detailsave>
+                        <table>detailsave</table>
+                    </detailsave>
+                </entities>
+            </detailsave_mysql4>
+        </models>
+        <resources>
+            <detailsave_setup>
+                <setup>
+                    <module>Ravi_Detailsave</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </detailsave_setup>
+            <detailsave_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </detailsave_write>
+            <detailsave_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </detailsave_read>
+        </resources>
+        <blocks>
+            <detailsave>
+                <class>Ravi_Detailsave_Block</class>
+            </detailsave>
+        </blocks>
+        <helpers>
+            <detailsave>
+                <class>Ravi_Detailsave_Helper</class>
+            </detailsave>
+        </helpers>
+    </global>
+</config>
